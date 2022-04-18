@@ -9,6 +9,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class AuthController extends Controller
 {
@@ -42,6 +43,8 @@ class AuthController extends Controller
 
         $user = $newUser->create($request->only('name', 'email', 'password', 'password_confirmation'));
 
+        $user->assignRole('Estudiante');
+
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
@@ -49,7 +52,8 @@ class AuthController extends Controller
             'message' => 'Register success',
             'data' => [
                 'access_token' => $token,
-                'token_type' => 'Bearer'
+                'token_type' => 'Bearer',
+                'user' => $user,
             ]
         ]);
     }

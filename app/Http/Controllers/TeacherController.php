@@ -15,7 +15,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        $data = Teacher::all();
+        $data = Teacher::with('group', 'subject', 'user')->get();
 
         return response()->json([
             'status' => true,
@@ -72,7 +72,7 @@ class TeacherController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Teacher',
-            'data' => $data
+            'data' => $data->with('user', 'subject', 'group')->get()
         ]);
     }
 

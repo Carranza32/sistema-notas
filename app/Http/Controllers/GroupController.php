@@ -15,7 +15,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        $data = Group::all();
+        $data = Group::with('teacher')->get();
 
         return response()->json([
             'status' => true,
@@ -72,7 +72,7 @@ class GroupController extends Controller
         return response()->json([
             'status' => true,
             'message' => 'Group',
-            'data' => $data
+            'data' => $data->with('teacher')->get()
         ]);
     }
 

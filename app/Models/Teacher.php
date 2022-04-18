@@ -18,4 +18,19 @@ class Teacher extends Model
         'subject_id',
         'user_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
+
+    public function group()
+    {
+        return $this->hasOne(Group::class);
+    }
 }

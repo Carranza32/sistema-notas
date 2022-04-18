@@ -14,18 +14,18 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         \DB::table('users')->delete();
-        
+
         \DB::table('users')->insert(array (
-            0 => 
+            0 =>
             array (
                 'id' => 1,
-                'name' => 'mario',
-                'email' => 'mario.carranza996@gmail.com',
+                'name' => 'Super admin',
+                'email' => 'super@gmail.com',
                 'email_verified_at' => NULL,
-                'password' => '$2y$10$MQuTajTyM9RiIOpJ1VOp..LN4lQjetP4mgYuERvzPuDYpLQpBeC56',
+                'password' => '$2y$10$qFFMGQN1kK7V7OeI2gVJm.0M2W/fjtPcsd80WC2TXWi0axReZLbOq',
                 'two_factor_secret' => NULL,
                 'two_factor_recovery_codes' => NULL,
                 'remember_token' => NULL,
@@ -33,7 +33,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2022-03-26 04:19:55',
             ),
         ));
-        
-        
+
+
     }
 }
