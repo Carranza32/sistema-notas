@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
@@ -25,7 +26,7 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Super admin',
                 'email' => 'super@gmail.com',
                 'email_verified_at' => NULL,
-                'password' => '$2y$10$qFFMGQN1kK7V7OeI2gVJm.0M2W/fjtPcsd80WC2TXWi0axReZLbOq',
+                'password' => bcrypt('secret123'),
                 'two_factor_secret' => NULL,
                 'two_factor_recovery_codes' => NULL,
                 'remember_token' => NULL,

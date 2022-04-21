@@ -15,7 +15,12 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        if (!Auth::attempt($request->only('email', 'password'))) {
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
+
+        if (! Auth::attempt( $credentials )) {
 
             return response()->json([
                 'status' => false,
@@ -32,7 +37,8 @@ class AuthController extends Controller
             'message' => 'Login success',
             'data' => [
                 'access_token' => $token,
-                'token_type' => 'Bearer'
+                'token_type' => 'Bearer',
+                'role' => $user->getRoleNames()->first()
             ]
         ]);
     }
