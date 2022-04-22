@@ -29,6 +29,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
         return User::where('id', $request->user()->id)->with('roles')->get();
     });
 
+    Route::get('/logout', [AuthController::class, 'logout']);
+
     Route::controller(SubjectController::class)->prefix('subjects')->group(function(){
         Route::get('/', 'index');
         Route::post('/', 'store');
