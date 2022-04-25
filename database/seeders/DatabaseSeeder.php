@@ -22,11 +22,11 @@ class DatabaseSeeder extends Seeder
         $this->call(ModelHasRolesTableSeeder::class);
         $this->call(SubjectsTableSeeder::class);
 
-        Teacher::factory(15)->create();
-        $this->call(GroupsTableSeeder::class);
+        // Teacher::factory(15)->create();
 
-        Student::factory(300)->create();
-        $this->call(StudentsTableSeeder::class);
+        // Student::factory(300)->create();
         $this->call(TeachersTableSeeder::class);
+        $this->call(GroupsTableSeeder::class);
+        $this->call(StudentsTableSeeder::class);
     }
 }
