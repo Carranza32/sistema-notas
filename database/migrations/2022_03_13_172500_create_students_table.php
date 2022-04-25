@@ -20,8 +20,7 @@ return new class extends Migration
             $table->string('email');
             $table->text('address')->nullable();
             $table->string('phone')->nullable();
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('grade_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
             $table->foreignId('group_id')->constrained();
             $table->timestamps();
         });
