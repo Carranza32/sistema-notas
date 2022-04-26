@@ -15,9 +15,22 @@ return new class extends Migration
     {
         Schema::create('scores', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('inscription_id')->constrained();
-            $table->foreignId('period_score_id')->constrained();
-            $table->decimal('year_average', 3, 2);
+            $table->foreignId('student_id')->constrained();
+            $table->foreignId('subject_id')->constrained();
+
+            $table->decimal('period1_score1', 10, 2)->nullable();
+            $table->decimal('period1_score2', 10, 2)->nullable();
+            $table->decimal('period1_score3', 10, 2)->nullable();
+
+            $table->decimal('period2_score1', 10, 2)->nullable();
+            $table->decimal('period2_score2', 10, 2)->nullable();
+            $table->decimal('period2_score3', 10, 2)->nullable();
+
+            $table->decimal('period3_score1', 10, 2)->nullable();
+            $table->decimal('period3_score2', 10, 2)->nullable();
+            $table->decimal('period3_score3', 10, 2)->nullable();
+
+            $table->decimal('final_average', 10, 2)->nullable();
             $table->timestamps();
         });
     }

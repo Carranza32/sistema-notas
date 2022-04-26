@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('inscriptions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('subject_id')->constrained();
+            $table->foreignId('group_id')->constrained();
             $table->foreignId('student_id')->constrained();
             $table->timestamps();
         });

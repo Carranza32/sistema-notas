@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Student;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Models\Inscription;
+use App\Models\Score;
+use App\Models\Subject;
+use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
@@ -21,6 +25,21 @@ class StudentController extends Controller
             'status' => true,
             'message' => 'Student list',
             'data' => $data
+        ]);
+    }
+
+    public function mySubjects()
+    {
+        $group = Inscription::where('student_id', Auth::user()->student->id)->first()->group;
+        $subjectKeys = Score::where('student_id', Auth::user()->student->id)->get(['subject_id']);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Student list',
+            'data' => [
+                'group' => $group,
+                'subjects' => Subject::whereIn('id', $subjectKeys)->get(),
+            ]
         ]);
     }
 

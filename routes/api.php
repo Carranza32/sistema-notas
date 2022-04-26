@@ -50,9 +50,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::controller(StudentController::class)->prefix('students')->group(function(){
         Route::get('/', 'index');
         Route::post('/', 'store');
-        Route::get('/{id}', 'show');
+        Route::get('/find/{id}', 'show');
         Route::put('/{id}', 'update');
         Route::delete('/{id}', 'destroy');
+
+        Route::get('/subjects', 'mySubjects');
     });
 
     Route::controller(SubjectController::class)->prefix('subjects')->group(function(){
