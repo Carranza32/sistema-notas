@@ -30,8 +30,8 @@ class StudentController extends Controller
 
     public function mySubjects()
     {
-        $group = Inscription::where('student_id', Auth::user()->student->id)->first()->group;
-        $subjectKeys = Score::where('student_id', Auth::user()->student->id)->get(['subject_id']);
+        $group = Auth::user()->student->group;
+        $subjectKeys = Score::where('student_id', Auth::user()->student->id)->pluck('subject_id');
 
         return response()->json([
             'status' => true,
