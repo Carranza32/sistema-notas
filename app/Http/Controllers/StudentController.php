@@ -43,6 +43,22 @@ class StudentController extends Controller
         ]);
     }
 
+    public function getSubject($subject_id)
+    {
+        $student = Student::with('group.teacher.subject')->where('id', Auth::user()->student->id)->first();
+        $scores = Score::where('student_id', Auth::user()->student->id)->where('subject_id', $subject_id)->get();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Student list',
+            'data' => [
+                'scores' => $scores,
+                'student' => $student,
+                'subject' => Subject::find($subject_id),
+            ]
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      *

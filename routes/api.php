@@ -55,6 +55,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('/{id}', 'destroy');
 
         Route::get('/subjects', 'mySubjects');
+        Route::get('/subjects/{id}', 'getSubject');
     });
 
     Route::controller(SubjectController::class)->prefix('subjects')->group(function(){
