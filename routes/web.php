@@ -31,6 +31,39 @@ Route::get('fix', function(){
     }
 });
 
+Route::get('test', function () {
+    $data = Score::select(
+        'students.name as estudiante',
+        'subjects.name as materia',
+
+        "scores.period1_score1",
+        "scores.period1_score2",
+        "scores.period1_score3",
+        // 'scores.average_period1 as Trimestre 1',
+
+        'scores.period2_score1',
+        'scores.period2_score2',
+        'scores.period2_score3',
+        // 'scores.average_period2 as Trimestre 2',
+
+        'scores.period3_score1',
+        'scores.period3_score2',
+        'scores.period3_score3',
+        // 'scores.average_period3 as Trimestre 3',
+        )
+    ->join('students', 'scores.student_id', 'students.id')
+    ->join('subjects', 'scores.subject_id', 'subjects.id')
+    ->where('student_id', 26)
+    ->get();
+
+    // $avg1 = $data->sum('average_period1') / 5;
+    // $avg2 = $data->sum('average_period2') / 5;
+    // $avg3 = $data->sum('average_period3') / 5;
+    // $final = ($avg1 + $avg2 + $avg3) / 3;
+
+    return $data;
+});
+
 Route::get('generate', function () {
     $students = Student::all();
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Exports\ScoreExport;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\GroupController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\TeacherController;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Maatwebsite\Excel\Facades\Excel;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,10 @@ use Illuminate\Support\Facades\Route;
 */
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
+
+Route::get('export-student/{id}', function ($id) {
+    return Excel::download(new ScoreExport($id), 'notas.xlsx');
+});
 //test
 
 Route::middleware(['auth:sanctum'])->group(function () {
