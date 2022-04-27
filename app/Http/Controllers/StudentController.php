@@ -45,7 +45,9 @@ class StudentController extends Controller
 
     public function getStudentScore($id)
     {
-        $data = Score::with('subject')->where('student_id', $id)->get();
+        $student = Student::with('group')->where('id', $id)->first();
+
+        $data = Score::with('subject', 'student')->where('student_id', $id)->get();
 
         $avg1 = $data->sum('average_period1') / 5;
         $avg2 = $data->sum('average_period2') / 5;
@@ -63,6 +65,7 @@ class StudentController extends Controller
                     'average3' => number_format($avg3, 2),
                     'final' => number_format($final, 2),
                 ],
+                'student' => $student
             ]
         ]);
     }
