@@ -14,8 +14,22 @@ class Group extends Model
         'teacher_id',
     ];
 
+    protected $appends = [
+        'students_count',
+    ];
+
     public function teacher()
     {
         return $this->belongsTo(Teacher::class);
+    }
+
+    public function students()
+    {
+        return $this->hasMany(Student::class);
+    }
+
+    public function getStudentsCountAttribute($value)
+    {
+        return Student::where('group_id', $this->id)->count();
     }
 }

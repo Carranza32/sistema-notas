@@ -23,7 +23,7 @@ class StudentFactory extends Factory
             'email' => $this->faker->safeEmail(),
             'address' => $this->faker->address(),
             'phone' => $this->faker->tollFreePhoneNumber(),
-            'group_id' => Group::all()->random()->first()->id,
+            'group_id' => Group::all()->random()->id,
         ];
     }
 }

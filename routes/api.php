@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\GradeController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\ScoreController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
@@ -56,6 +57,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         Route::get('/subjects', 'mySubjects');
         Route::get('/subjects/{id}', 'getSubject');
+
+        Route::get('/scores/{student_id}', 'getStudentScore');
     });
 
     Route::controller(SubjectController::class)->prefix('subjects')->group(function(){
@@ -66,18 +69,24 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::delete('/{id}', 'destroy');
     });
 
+    Route::controller(ScoreController::class)->prefix('scores')->group(function(){
+        Route::put('/{id}', 'update');
+    });
+
     Route::controller(TeacherController::class)->prefix('teachers')->group(function(){
         Route::get('/', 'index');
         Route::post('/', 'store');
-        Route::get('/{id}', 'show');
+        Route::get('find/{id}', 'show');
         Route::put('/{id}', 'update');
         Route::delete('/{id}', 'destroy');
+
+        Route::get('groups', 'myGroups');
     });
 
     Route::controller(GroupController::class)->prefix('groups')->group(function(){
         Route::get('/', 'index');
         Route::post('/', 'store');
-        Route::get('/{id}', 'show');
+        Route::get('find/{id}', 'show');
         Route::put('/{id}', 'update');
         Route::delete('/{id}', 'destroy');
     });

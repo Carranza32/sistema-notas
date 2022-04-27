@@ -43,6 +43,30 @@ class StudentController extends Controller
         ]);
     }
 
+    public function getStudentScore($id)
+    {
+        $data = Score::with('subject')->where('student_id', $id)->get();
+
+        $avg1 = $data->sum('average_period1') / 5;
+        $avg2 = $data->sum('average_period2') / 5;
+        $avg3 = $data->sum('average_period3') / 5;
+        $final = ($avg1 + $avg2 + $avg3) / 3;
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Student list',
+            'data' => [
+                'scores' => $data,
+                'globals' => [
+                    'average1' => number_format($avg1, 2),
+                    'average2' => number_format($avg2, 2),
+                    'average3' => number_format($avg3, 2),
+                    'final' => number_format($final, 2),
+                ],
+            ]
+        ]);
+    }
+
     public function getSubject($subject_id)
     {
         $student = Student::with('group.teacher.subject')->where('id', Auth::user()->student->id)->first();

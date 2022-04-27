@@ -68,9 +68,17 @@ class ScoreController extends Controller
      * @param  \App\Models\Score  $score
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateScoreRequest $request, Score $score)
+    public function update(UpdateScoreRequest $request, $id)
     {
-        //
+        $data = Score::findOrFail($id);
+
+        $data->update($request->all());
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Score edited',
+            'data' => $data
+        ]);
     }
 
     /**

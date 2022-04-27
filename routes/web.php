@@ -22,12 +22,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('fix', function(){
+    $students = Student::all();
+
+    foreach ($students as $student) {
+        $student->group_id = Group::all()->random()->id;
+        $student->save();
+    }
+});
+
 Route::get('generate', function () {
     $students = Student::all();
 
     foreach ($students as $student) {
         $inscription = new Inscription();
-        $inscription->group_id = Group::all()->random()->first()->id;
+        $inscription->group_id = Group::all()->random()->id;
         $inscription->student_id = $student->id;
         $inscription->save();
 

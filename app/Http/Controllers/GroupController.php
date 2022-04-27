@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Group;
 use App\Http\Requests\StoreGroupRequest;
 use App\Http\Requests\UpdateGroupRequest;
+use App\Models\Score;
+use App\Models\Student;
 
 class GroupController extends Controller
 {
@@ -59,7 +61,7 @@ class GroupController extends Controller
      */
     public function show($id)
     {
-        $data = Group::find($id);
+        $data = Group::with('students', 'teacher')->where('id', $id)->first();
 
         if ($data == null) {
             return response()->json([
@@ -69,10 +71,14 @@ class GroupController extends Controller
             ], 404);
         }
 
+        // $studentKeys = Student::where('group_id', $data->id)->pluck('id');
+
+        // $data = Score::with('student.group.teacher')->whereIn('student_id', $studentKeys)->get();
+
         return response()->json([
             'status' => true,
             'message' => 'Group',
-            'data' => $data->with('teacher')->get()
+            'data' => $data
         ]);
     }
 

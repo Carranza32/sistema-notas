@@ -21,6 +21,10 @@ class Subject extends Model
 
     public function getStudentAverageAttribute($value)
     {
-        return Score::where('student_id', Auth::user()->student->id)->where('subject_id', $this->id)->first()->final_average ?? 0.0;
+        if (Auth::user()->student) {
+            return Score::where('student_id', Auth::user()->student->id)->where('subject_id', $this->id)->first()->final_average ?? 0.0;
+        }
+
+        return null;
     }
 }

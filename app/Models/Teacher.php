@@ -29,8 +29,8 @@ class Teacher extends Model
         return $this->belongsTo(Subject::class);
     }
 
-    public function group()
+    public function groups()
     {
-        return $this->hasOne(Group::class);
+        return $this->hasMany(Group::class);
     }
 }
